@@ -1,57 +1,36 @@
-iinclude "holberton.h"
 #include <stdlib.h>
 
 /**
- * *string_nconcat - Concatinates two strings
- *
- * @s1: char pointer
- *
- * @s2: char pointer
- *
- * @n: unsigned int
- *
- * Return: Pointer to s1, n bytes of s2
+ * *string_nconcat - concatenates 2 strings
+ * @s1: pointer to first string
+ * @s2: pointer to second string
+ * @n: number of bytes to use from s2
+ * Return: pointer to newly created string, else NULL if failure occurs
  */
-
 char *string_nconcat(char *s1, char *s2, unsigned int n)
 {
-	unsigned int counter1, counter2, i, j;
-	char *strTemp;
+	char *str;
+	unsigned int index, index2, len1, len2;
 
-	counter1 = 0;
-	counter2 = 0;
-
-	if (s1 == NULL)
+	if (s1 == 0)
 		s1 = "";
-	if (s2 == NULL)
+	if (s2 == 0)
 		s2 = "";
-	while (s1[counter1] != '\0')
-		counter1++;
-	while (s2[counter2] != '\0')
-		counter2++;
-
-	if (n > counter2)
-	{
-		n = counter2;
-	}
-	strTemp = malloc(sizeof(char) * (counter1 + (n + 1)));
-
-	if (strTemp == NULL)
-	{
-		return (NULL);
-	}
-	for (i = 0; i < counter1; i++)
-	{
-		strTemp[i] =  s1[i];
-	}
-	for (j = 0; j < n; j++)
-	{
-		strTemp[i] = s2[j];
-		i++;
-	}
-	strTemp[i] = '\0';
-	return (strTemp);
+	len1 = 0;
+	while (*(s1 + len1))
+		len1++;
+	len2 = 0;
+	while (*(s2 + len2))
+		len2++;
+	if (n >= len2)
+		n = len2;
+	str = malloc(sizeof(char) * (len1 + n + 1));
+	if (str == 0)
+		return (0);
+	for (index = 0; index < len1; index++)
+		*(str + index) = *(s1 + index);
+	for (index2 = 0; index2 < n; index2++, index++)
+		*(str + index) = *(s2 + index2);
+	*(str + index) = '\0';
+	return (str);
 }
-
-		
-	

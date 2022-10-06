@@ -1,38 +1,24 @@
-#include "holberton.h"
+#include "main.h"
 #include <stdlib.h>
 
 /**
- * _calloc - Allocate memory for an array.
+ * _calloc - allocates memory for an array, using malloc
  *
- * @nmemb: number of elements
- *
- * @size: bytes of each element
- *
- * Return: void
+ * @nmemb: members of array
+ * @size: size of each member
+ * Return: void pointer
  */
-
 void *_calloc(unsigned int nmemb, unsigned int size)
 {
-	char *strArray;
-	unsigned int counter;
+	unsigned int i;
+	char *arr;
 
 	if (nmemb == 0 || size == 0)
-	{
 		return (NULL);
-	}
-
-	strArray = malloc(nmemb * size);
-
-	if (strArray == NULL)
-	{
-		return (NULL);
-	}
-	counter = 0;
-
-	while (counter < (nmemb * size))
-	{
-		strArray[counter] = 0;
-		counter++;
-	}
-	return (strArray);
+	arr = malloc(nmemb * size);
+	if (arr == NULL)
+		return (arr);
+	for (i = 0; i < (nmemb * size); i++)
+		arr[i] = 0;
+	return (arr);
 }
